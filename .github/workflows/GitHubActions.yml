@@ -25,10 +25,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Setup AWS CLI
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Upload file to S3
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ secrets.AWS_REGION }}
+          role-session-name: github-actions-test
           role-to-assume: ${{ secrets.IAM_ROLE }}
           
       - name: Sync files to S3 bucket
